@@ -1,2 +1,2 @@
-# spring
-spring 실습
+# Spring
+Spring 실습
