@@ -10,6 +10,6 @@ public class ApiController {
 
     @GetMapping("/hello") // http://localhost:8080/api/hello
     public String hello(){
-        return "hello spring boot!";
+        return "hello spring boot!"; 
     }
 }
