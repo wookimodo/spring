@@ -26,9 +26,6 @@ public class ApiController {
                 FieldError field = (FieldError) objectError;
                 String message = objectError.getDefaultMessage();
 
-                System.out.println("field : " + field.getField());
-                System.out.println(message);
-
                 sb.append("field : " + field.getField());
                 sb.append("message : " + message);
 

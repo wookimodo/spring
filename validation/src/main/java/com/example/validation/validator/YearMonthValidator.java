@@ -7,6 +7,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+// ConstraintValidator를 상속받아서 재사용가능하게 만듦.
 public class YearMonthValidator implements ConstraintValidator<YearMonth, String> {
 
     private  String pattern;
@@ -21,7 +22,7 @@ public class YearMonthValidator implements ConstraintValidator<YearMonth, String
 
         // yyyyMM
         try{
-            LocalDate localDate = LocalDate.parse(value + "01", DateTimeFormatter.ofPattern("yyyyMMdd"));
+            LocalDate localDate = LocalDate.parse(value + "01", DateTimeFormatter.ofPattern(this.pattern));
         }catch(Exception e){
             return false;
         }
