@@ -28,7 +28,7 @@ public class GlobalFilter implements Filter {
 
         String url = httpServletRequest.getRequestURI();
         // 후처리
-        // req
+        // request
         String reqContent = new String(httpServletRequest.getContentAsByteArray());
         log.info("request url : {}, request body : {}", url, reqContent);
 
