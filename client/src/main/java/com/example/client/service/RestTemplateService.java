@@ -2,6 +2,8 @@ package com.example.client.service;
 
 import com.example.client.dto.UserRequest;
 import com.example.client.dto.UserResponse;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -35,7 +37,7 @@ public class RestTemplateService {
         return result.getBody();
     }
 
-    public UserResponse post(){
+    public UserResponse post() {
         //http://localhost:9090/api/server/user/{userId}/name/{userName}
 
         URI uri = UriComponentsBuilder
@@ -43,7 +45,7 @@ public class RestTemplateService {
                 .path("/api/server/user/{userId}/name/{userName}")
                 .encode()
                 .build()
-                .expand(100,"steve")
+                .expand(100, "steve")
                 .toUri();
         System.out.println(uri);
 
@@ -62,7 +64,37 @@ public class RestTemplateService {
         System.out.println(response.getBody());
 
         return response.getBody();
-
-
     }
+
+    public UserResponse exchange(){
+
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://localhost:9090")
+                .path("/api/server/user/{userId}/name/{userName}")
+                .encode()
+                .build()
+                .expand(100,"steve")
+                .toUri();
+        System.out.println(uri);
+
+        // post기 때문에 http body가 필요함 -> object -> object mapper -> json -> rest template -> http body json
+
+        UserRequest req = new UserRequest();
+        req.setName("steve");
+        req.setAge(10);
+
+        RequestEntity<UserRequest> requestEntity = RequestEntity
+                .post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("x-authorization", "abcd")
+                .header("custom-header", "fffff")
+                .body(req);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<UserResponse> response = restTemplate.exchange(requestEntity, UserResponse.class);
+        return  response.getBody();
+    }
+
+
+
 }
