@@ -77,7 +77,7 @@ class UserRepositoryTest {
 //
 //        users.getContent().forEach(System.out::println);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
+        /*ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnorePaths("name") // 이름은 무시하고. 이 설정을 넣지 않으면 exact 매치가 이루어짐.
                 .withMatcher("email",endsWith()); // 이메일이 똑같이 끝나는 걸 매치시켜라
 
@@ -94,6 +94,17 @@ class UserRepositoryTest {
         Example<User> example2 = Example.of(new User("ma", "fastcampus.com"));
 
         userRepository.findAll(example).forEach(System.out::println);
-        userRepository.findAll(example1).forEach(System.out::println);
+        userRepository.findAll(example1).forEach(System.out::println);*/
+
+        // save는 insert 쿼리 동작
+        userRepository.save(new User("david", "david@fastcampus.com"));
+
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setEmail("martin-update@fastcampus.com");
+
+        userRepository.save(user);
+
+
+
     }
 }
