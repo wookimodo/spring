@@ -3,6 +3,7 @@ package com.fastcampus.jpa.bookmanager.repository;
 import com.fastcampus.jpa.bookmanager.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -37,5 +38,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // And 사용
     List<User> findByEmailAndName(String email, String name);
+
+    // Or 사용
+    List<User> findByEmailOrName(String email, String name);
+
+    List<User> findByCreatedAtAfter(LocalDateTime yesterday);
+
+    List<User> findByIdAfter(Long id);
+
+
 
 }

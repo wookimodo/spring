@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -125,6 +126,12 @@ class UserRepositoryTest {
         System.out.println("findLast1ByName : " + userRepository.findLast1ByName("martin"));*/
 
         System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("martin@fastcampus.com","martin"));
+        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("martin@fastcampus.com","martin"));
+
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(4L));
+
 
     }
 }
